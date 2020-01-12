@@ -112,14 +112,10 @@ class C45:
         separado_ = []
         maxEnt = -1*float("inf")
         mejor_atributo = -1
-        #None for discrete atributos, limite value for continuous atributos
         mejor_limite = None
         for atributo in curatributos:
             indice_de_atributo = self.atributos.index(atributo)
             if self.es_atributo_discreto(atributo):
-                #split curData into n-sub_conjuntos, where n is the number of 
-                #different valores of atributo i. Choose the atributo with
-                #the max ganancia
                 valores_para_atributoo = self.valores_de_atributos[atributo]
                 sub_conjuntos = [[] for a in valores_para_atributoo]
                 for fila in curData:
@@ -133,9 +129,6 @@ class C45:
                     mejor_atributo = atributo
                     mejor_limite = None
             else:
-                #sort the data according to the column.Then try all 
-                #possible adjacent pairs. Choose the one that 
-                #yields maximum ganancia
                 curData.sort(key = lambda x: x[indice_de_atributo])
                 for j in range(0, len(curData) - 1):
                     if curData[j][indice_de_atributo] != curData[j+1][indice_de_atributo]:
